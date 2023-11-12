@@ -12,7 +12,7 @@ const Modal = ({ children, title, onClose }) => {
             {title}
           </h3>
           <div className="mt-2 px-7 py-3">{children}</div>
-          <div className="items-center px-7 py-3">
+          <div className="items-center px-7">
             <button
               id="ok-btn"
               className="px-4 py-2 bg-red-700 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-gray-300"

@@ -30,7 +30,10 @@ const AddCampaignForm = ({ token, onClose }) => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <form onSubmit={handleAddCampaign} className="w-full max-w-md">
+      <form
+        onSubmit={handleAddCampaign}
+        className="flex flex-col w-full max-w-md"
+      >
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
@@ -83,21 +86,14 @@ const AddCampaignForm = ({ token, onClose }) => {
             required
           />
         </div>
-        <div className="flex items-center justify-between">
-          <button
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Add Campaign
-          </button>
-          <button
-            onClick={onClose}
-            type="button"
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Cancel
-          </button>
-        </div>
+
+        <button
+          className="bg-indigo-600 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded"
+          type="submit"
+        >
+          Add Campaign
+        </button>
+
         {error && <p className="text-red-500 text-xs italic">{error}</p>}
       </form>
     </div>
