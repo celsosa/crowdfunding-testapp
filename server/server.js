@@ -5,7 +5,14 @@ const mysql = require("mysql");
 const bcrypt = require("bcrypt");
 
 const app = express();
+
+const cors = require("cors");
+
+// Middleware for parsing JSON bodies
 app.use(express.json());
+
+// Middleware for enabling CORS
+app.use(cors());
 
 // MySQL database connection configuration
 const db = mysql.createConnection({
@@ -103,6 +110,10 @@ app.post("/addCampaign", verifyAdminToken, (req, res) => {
 app.post("/donate", (req, res) => {
   const { campaignId, donatorNickname, amount } = req.body;
 
+  if (!Number.isInteger(campaignId)) {
+    return res.status(400).send("Invalid campaign ID. It must be an integer.");
+  }
+
   db.query(
     "CALL InsertDonation(?, ?, ?)",
     [campaignId, donatorNickname, amount],
@@ -130,6 +141,25 @@ app.post("/markAsFraud", verifyApiKey, (req, res) => {
       res.status(200).send("Donator marked as fraud successfully");
     }
   );
+});
+
+// Route to get the list of active campaigns
+app.get("/api/campaigns", (req, res) => {
+  const query = `
+    SELECT c.id, c.name, c.description, c.goal_usd, c.status, IFNULL(SUM(d.amount), 0) AS amount_raised
+    FROM campaigns c
+    LEFT JOIN donations d ON c.id = d.campaign_id AND d.status = 'valid'
+    WHERE c.status = 'active' OR c.status = 'successful'
+    GROUP BY c.id
+  `;
+
+  db.query(query, (error, results) => {
+    if (error) {
+      console.error("Error retrieving campaigns:", error);
+      return res.status(500).send("Error retrieving campaigns");
+    }
+    res.status(200).json(results);
+  });
 });
 
 // Start the server
