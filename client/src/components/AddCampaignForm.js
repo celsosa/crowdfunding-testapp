@@ -21,7 +21,7 @@ const AddCampaignForm = ({ token, onClose }) => {
       setName("");
       setDescription("");
       setGoal("");
-      onClose(); // Fechar o modal após adicionar a campanha
+      onClose(); // close modal
     } catch (err) {
       setError("Failed to add campaign. Please try again.");
       console.error("Add campaign error:", err);

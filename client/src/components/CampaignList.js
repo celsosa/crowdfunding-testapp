@@ -16,7 +16,6 @@ const CampaignList = () => {
       setLoading(true);
       setError("");
       try {
-        // Replace '/api/campaigns' with your actual endpoint
         const response = await axios.get("http://localhost:3001/api/campaigns");
         setCampaigns(response.data);
       } catch (err) {

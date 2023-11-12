@@ -16,8 +16,8 @@ const AdminLogin = ({ onLoginSuccess }) => {
         username,
         password,
       });
-      onLoginSuccess(response.data.token); // Atualiza o estado no componente pai
-      navigate("/"); // Redireciona para a página inicial após o login com sucesso
+      onLoginSuccess(response.data.token); // update the parent state
+      navigate("/"); // redirect to initial page
     } catch (err) {
       setError("Failed to login. Please check your credentials.");
       console.error("Login error:", err);
