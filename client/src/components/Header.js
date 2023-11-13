@@ -15,11 +15,11 @@ const Header = ({ isLoggedIn, onLogout, onOpenAddCampaignModal }) => {
 
   return (
     <header className="flex bg-indigo-600 text-white p-4 text-lg font-bold justify-center">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-white no-underline">
+      <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center">
+        <Link to="/" className="text-white no-underline sm:mb-0 mb-8">
           Crowdfunding App
         </Link>
-        <nav>
+        <nav className="flex">
           {isLoggedIn ? (
             <>
               <button
