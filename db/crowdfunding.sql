@@ -117,13 +117,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertDonation`(
     IN p_amount DECIMAL(10, 2)
 )
 BEGIN
-    -- Aqui você insere a lógica para adicionar uma nova doação.
-    -- Por exemplo, inserindo na tabela de doações:
+
     INSERT INTO donations (campaign_id, donator_nickname, amount) 
     VALUES (p_campaignId, p_donatorNickname, p_amount);
-    
-    -- Aqui você pode adicionar qualquer lógica adicional que precisa ser executada
-    -- após inserir uma doação, como verificar o status da campanha, etc.
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
